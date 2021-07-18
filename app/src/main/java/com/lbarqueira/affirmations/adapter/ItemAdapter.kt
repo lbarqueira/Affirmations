@@ -4,11 +4,13 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.lbarqueira.affirmations.R
 import com.lbarqueira.affirmations.model.Affirmation
 
+// 5 - Create an ItemAdapter class
 // The ItemAdapter needs information on how to resolve the string resources.
 // This, and other information about the app, is stored in a Context object instance
 // that you can pass into an ItemAdapter instance.
@@ -18,14 +20,18 @@ class ItemAdapter(
     private val dataset: List<Affirmation>
 ) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
+    // 6 - Create a ViewHolder
     // Defining a class inside another class is called creating a nested class
     // A ViewHolder represents a single list item view in RecyclerView,
     // and can be reused when possible.
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.item_title)
+        val imageView: ImageView = view.findViewById(R.id.item_image)
     }
 
-    // The onCreateViewHolder()method is called by the layout manager to create new view holders
+    // 7 - Override adapter methods
+
+    // The onCreateViewHolder() method is called by the layout manager to create new view holders
     // for the RecyclerView (when there are no existing view holders that can be reused).
     // Remember that a view holder represents a single list item view.
     /**
@@ -43,6 +49,7 @@ class ItemAdapter(
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset[position]
         holder.textView.text = context.resources.getString(item.stringResourceId)
+        holder.imageView.setImageResource(item.imageResourceId)
     }
 
     /**
